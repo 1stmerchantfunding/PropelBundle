@@ -52,6 +52,14 @@ class PropelDataCollector extends DataCollector
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function reset()
+    {
+        $this->data = array();
+    }
+
+    /**
      * Returns queries.
      *
      * @return array Queries
