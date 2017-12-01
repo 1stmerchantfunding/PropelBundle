@@ -9,7 +9,7 @@
     </parameters>
 
     <services>
-        <service id="propel.converter.propel.orm" class="%propel.converter.propel.class%">
+        <service id="propel.converter.propel.orm" class="%propel.converter.propel.class%" public="true">
             <tag name="request.param_converter" converter="propel" priority="1" />
         </service>
     </services>
