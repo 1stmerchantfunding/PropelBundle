@@ -43,7 +43,7 @@ class PropelExtension extends Extension
                 $config['generator']['defaultConnection'] = $defaultConnection;
             }
         }
-        
+
         $container->setParameter('propel.logging', $config['runtime']['logging']);
         $container->setParameter('propel.configuration', $config);
 
@@ -58,7 +58,7 @@ class PropelExtension extends Extension
 
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
-        return new Configuration($container->getParameter('kernel.debug'), $container->getParameter('kernel.root_dir'));
+        return new Configuration($container->getParameter('kernel.debug'), $container->getParameter('kernel.project_dir'));
     }
 
     /**

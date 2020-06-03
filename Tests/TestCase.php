@@ -22,8 +22,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
     public function getContainer()
     {
         $container = new ContainerBuilder(new ParameterBag(array(
-            'kernel.debug'      => false,
-            'kernel.root_dir'   => __DIR__ . '/../',
+            'kernel.debug'       => false,
+            'kernel.project_dir' => __DIR__ . '/../',
         )));
 
         $container->setParameter('propel.configuration', array());
