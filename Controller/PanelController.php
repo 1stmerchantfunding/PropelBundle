@@ -14,6 +14,7 @@ use Propel\Runtime\Propel;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Psr\Container\ContainerInterface;
 
 /**
  * PanelController is designed to display information in the Propel Panel.
