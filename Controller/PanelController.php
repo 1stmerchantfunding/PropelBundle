@@ -11,9 +11,7 @@
 namespace Propel\Bundle\PropelBundle\Controller;
 
 use Propel\Runtime\Propel;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -21,19 +19,29 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author William DURAND <william.durand1@gmail.com>
  */
-class PanelController extends Controller
+class PanelController extends AbstractController
 {
+    private $params;
+
+    /**
+     * Set up our dependencies
+     */
+    public function __construct(ContainerInterface $container, ParameterBagInterface $params) {
+        $this->container = $container;
+        $this->params = $params;
+    }
+
     /**
      * This method renders the global Propel configuration.
      */
-    public function configurationAction()
+    public function configuration()
     {
         return $this->render(
             '@Propel/Panel/configuration.html.twig',
             array(
                 'propel_version'     => Propel::VERSION,
-                'configuration'      => $this->getParameter('propel.configuration'),
-                'logging'            => $this->getParameter('propel.logging'),
+                'configuration'      => $this->params->get('propel.configuration'),
+                'logging'            => $this->params->get('propel.logging'),
             )
         );
     }
@@ -47,7 +55,7 @@ class PanelController extends Controller
      *
      * @return Response A Response instance
      */
-    public function explainAction($token, $connection, $query)
+    public function explain($token, $connection, $query)
     {
         $profiler = $this->get('profiler');
         $profiler->disable();

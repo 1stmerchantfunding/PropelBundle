@@ -19,6 +19,12 @@
     </parameters>
 
     <services>
+        <service id="Propel\Bundle\PropelBundle\Controller\PanelController" public="true">
+            <tag name="container.service_subscriber" />
+            <argument type="service" id="Psr\Container\ContainerInterface"/>
+            <argument type="service" id="parameter_bag"/>
+        </service>
+
         <service id="propel.schema_locator" class="%propel.schema_locator.class%" public="true">
             <argument type="service" id="file_locator" />
             <argument>%propel.configuration%</argument>
