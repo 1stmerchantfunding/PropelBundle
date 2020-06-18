@@ -19,12 +19,6 @@
     </parameters>
 
     <services>
-        <service id="Propel\Bundle\PropelBundle\Controller\PanelController" public="true">
-            <tag name="container.service_subscriber" />
-            <argument type="service" id="Psr\Container\ContainerInterface"/>
-            <argument type="service" id="parameter_bag"/>
-        </service>
-
         <service id="propel.schema_locator" class="%propel.schema_locator.class%" public="true">
             <argument type="service" id="file_locator" />
             <argument>%propel.configuration%</argument>
@@ -67,6 +61,88 @@
         <service id="propel.loader.xml" class="%propel.loader.xml.class%" public="true">
             <argument>%kernel.project_dir%</argument>
             <argument>%propel.configuration%</argument>
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Controller\PanelController" public="true">
+            <tag name="container.service_subscriber" />
+            <argument type="service" id="Psr\Container\ContainerInterface"/>
+            <argument type="service" id="parameter_bag"/>
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\AclInitCommand">
+            <tag name="console.command" command="propel:acl:init"/>
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\BuildCommand">
+            <tag name="console.command" command="propel:build" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\DatabaseCreateCommand">
+            <tag name="console.command" command="propel:database:create" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\DatabaseDropCommand">
+            <tag name="console.command" command="propel:database:drop" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\DatabaseReverseCommand">
+            <tag name="console.command" command="propel:database:drop" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\FixturesDumpCommand">
+            <tag name="console.command" command="propel:fixtures:dump" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\FixturesLoadCommand">
+            <tag name="console.command" command="propel:fixtures:load" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\FormGenerateCommand">
+            <tag name="console.command" command="propel:form:generate"/>
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\GraphvizGenerateCommand">
+            <tag name="console.command" command="propel:graphviz:generate" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\MigrationDiffCommand">
+            <tag name="console.command" command="propel:migration:diff" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\MigrationDownCommand">
+            <tag name="console.command" command="propel:migration:down "/>
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\MigrationDownCommand">
+            <tag name="console.command" command="propel:migration:down" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\MigrationMigrateCommand">
+            <tag name="console.command" command="propel:migration:migrate" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\MigrationStatusCommand">
+            <tag name="console.command" command="propel:migration:status" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\MigrationUpCommand">
+            <tag name="console.command" command="propel:migration:up" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\ModelBuildCommand">
+            <tag name="console.command" command="propel:model:build" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\SqlBuildCommand">
+            <tag name="console.command" command="propel:sql:build" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\SqlInsertCommand">
+            <tag name="console.command" command="propel:sql:insert" />
+        </service>
+
+        <service id="Propel\Bundle\PropelBundle\Command\TableDropCommand">
+            <tag name="console.command" command="propel:table:drop" />
         </service>
     </services>
 </container>

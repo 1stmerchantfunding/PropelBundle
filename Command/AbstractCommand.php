@@ -10,7 +10,6 @@
 
 namespace Propel\Bundle\PropelBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,11 +18,12 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Propel\Bundle\PropelBundle\Util\WrapCommand;
 
 /**
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
-abstract class AbstractCommand extends ContainerAwareCommand
+abstract class AbstractCommand extends Command
 {
     /**
      * @var string
@@ -59,11 +59,16 @@ abstract class AbstractCommand extends ContainerAwareCommand
         $this->cacheDir = $kernel->getCacheDir().'/propel';
 
         if ($input->hasArgument('bundle') && '@' === substr($input->getArgument('bundle'), 0, 1)) {
-            $this->bundle = $this
-                ->getContainer()
-                ->get('kernel')
-                ->getBundle(substr($input->getArgument('bundle'), 1));
+            $this->bundle = $kernel->getBundle(substr($input->getArgument('bundle'), 1));
         }
+    }
+
+    /**
+     * Gets the container
+     */
+    protected function getContainer()
+    {
+        return $this->getApplication()->getKernel()->getContainer();
     }
 
     /**
@@ -220,6 +225,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
         }
 
         $command->setApplication($this->getApplication());
+
+        // wrap command to ensure it returns a status code
+        WrapCommand::wrap($command);
 
         // and run the sub-command
         return $command->run(new ArrayInput($parameters), $output);
