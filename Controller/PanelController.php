@@ -14,6 +14,7 @@ use Propel\Runtime\Propel;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -57,9 +58,8 @@ class PanelController extends AbstractController
      *
      * @return Response A Response instance
      */
-    public function explain($token, $connection, $query)
+    public function explain($token, $connection, $query, Profiler $profiler)
     {
-        $profiler = $this->get('profiler');
         $profiler->disable();
 
         $profile = $profiler->loadProfile($token);
