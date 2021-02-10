@@ -10,6 +10,9 @@
 
 namespace Propel\Bundle\PropelBundle\Twig\Extension;
 
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
 /**
  * SyntaxExtension class
  *
@@ -17,13 +20,13 @@ namespace Propel\Bundle\PropelBundle\Twig\Extension;
  * @subpackage Extension
  * @author William DURAND <william.durand1@gmail.com>
  */
-class SyntaxExtension extends \Twig_Extension
+class SyntaxExtension extends AbstractExtension
 {
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('format_sql', [$this, 'formatSQL'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFilter('format_memory', [$this, 'formatMemory']),
+            new TwigFilter('format_sql', [$this, 'formatSQL'], ['is_safe' => ['html']]),
+            new TwigFilter('format_memory', [$this, 'formatMemory']),
         ];
     }
 
